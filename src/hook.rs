@@ -4,7 +4,7 @@ use std::fs::{self, File};
 use std::io::Write;
 use std::os::unix::fs::PermissionsExt;
 
-static HOOK: &str = "#!/bin/sh\nexec grawler check";
+static HOOK: &str = "grawler check";
 
 pub fn setup() {
     eprintln!("Creating a git pre-commit hook...");
