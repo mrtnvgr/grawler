@@ -24,6 +24,14 @@ You can specify tokens for increased rate limits:
 GITHUB_TOKEN=`gh auth token` grawler check
 ```
 
+Integrate with Github Workflows:
+
+```yaml
+- uses: cargo-bins/cargo-binstall@main
+- run: cargo binstall grawler
+- run: grawler check
+```
+
 ## Installation
 
 ```
