@@ -453,8 +453,9 @@ dependencies = [
 
 [[package]]
 name = "gitfrog"
-version = "0.1.0"
-source = "git+https://github.com/mrtnvgr/gitfrog?branch=master#3b7a29a18f7b21cc4e73a68fe55383eee2863d02"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f057607c7992339a551d63a890eba0cd9a16c4a963bb8a3ab247ba2eb5356e67"
 dependencies = [
  "futures",
  "reqwest",

@@ -10,7 +10,7 @@ repository = "https://github.com/mrtnvgr/grawler"
 clap = { version = "4.5", features = ["derive"] }
 cli-logger = "0.1"
 git2 = "0.18"
-gitfrog = { git = "https://github.com/mrtnvgr/gitfrog", branch = "master" }
+gitfrog = "0.1"
 ignore = "0.4"
 lazy_static = "1.4"
 log = "0.4"
