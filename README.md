@@ -27,9 +27,8 @@ GITHUB_TOKEN=`gh auth token` grawler check
 Integrate with Github Workflows:
 
 ```yaml
-- uses: cargo-bins/cargo-binstall@main
-- run: cargo binstall grawler -y --force
-- run: grawler check
+- run: wget https://github.com/mrtnvgr/grawler/releases/latest/download/grawler
+- run: chmod +x grawler; ./grawler check
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -39,7 +38,3 @@ Integrate with Github Workflows:
 ```
 cargo install grawler
 ```
-
-## TODO
-
-- [ ] Template for Github Workflows
