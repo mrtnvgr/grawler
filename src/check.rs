@@ -51,16 +51,16 @@ pub async fn perform(args: Check) {
         .filter(|x| x.file_type().is_some_and(|t| !t.is_dir()));
 
     let mut contexts = Vec::new();
+    let cwd = std::env::current_dir().expect("Failed to get cwd");
 
     for file in files {
         let Ok(text) = read_to_string(file.path()) else {
             continue;
         };
 
-        let cwd = std::env::current_dir().expect("Failed to get cwd");
         let rel_path = file
             .path()
-            .strip_prefix(cwd)
+            .strip_prefix(&cwd)
             .expect("Failed to get relative path");
         let path = rel_path.to_string_lossy().to_string();
 
@@ -82,10 +82,12 @@ pub async fn perform(args: Check) {
         exit(1);
     }
 
+    // Fuses
     let mut exit_code = 0;
 
     let urls: Vec<&Url> = contexts.iter().map(|x| &x.link).collect();
     let results = GitInfo::from_urls_ref(urls).await;
+    let res_count = results.len();
     for (result, context) in results
         .into_iter()
         .map(Result::unwrap)
@@ -114,7 +116,9 @@ pub async fn perform(args: Check) {
         }
     }
 
-    println!();
+    if res_count > 0 {
+        println!();
+    }
 
     exit(exit_code);
 }
