@@ -2,11 +2,14 @@ use clap::Parser;
 use git2::Repository;
 
 mod check;
+mod hook;
 
 #[derive(Parser)]
 enum Commands {
     #[command(name = "check", about = "perform checks on urls in files")]
     Check(Check),
+    #[command(name = "setup-hook", about = "set up a git pre-commit hook")]
+    SetupHook,
 }
 
 #[derive(Parser)]
@@ -31,5 +34,6 @@ async fn main() {
 
     match command {
         Commands::Check(args) => check::perform(args).await,
+        Commands::SetupHook => hook::setup(),
     }
 }

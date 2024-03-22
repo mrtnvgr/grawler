@@ -6,8 +6,16 @@ Check PR and issue URLs state
 
 ## Usage
 
+Check all files:
+
 ```bash
 grawler check
+```
+
+Setup a pre-commit hook:
+
+```bash
+grawler setup-hook
 ```
 
 You can specify tokens for increased rate limits:
@@ -24,5 +32,4 @@ cargo install grawler
 
 ## TODO
 
-- [ ] `grawler setup-hooks`
 - [ ] Template for Github Workflows
