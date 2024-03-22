@@ -28,8 +28,10 @@ Integrate with Github Workflows:
 
 ```yaml
 - uses: cargo-bins/cargo-binstall@main
-- run: cargo binstall grawler
+- run: cargo binstall grawler -y --force
 - run: grawler check
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Installation
