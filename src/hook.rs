@@ -1,9 +1,8 @@
 use git2::Repository;
-use std::{
-    fs::{self, File},
-    io::Write,
-    os::unix::fs::PermissionsExt,
-};
+use log_err::LogErrResult;
+use std::fs::{self, File};
+use std::io::Write;
+use std::os::unix::fs::PermissionsExt;
 
 static HOOK: &str = "#!/bin/sh\nexec grawler check";
 
@@ -14,7 +13,7 @@ pub fn setup() {
         .map(|x| x.path().join("hooks"))
         .unwrap();
 
-    fs::create_dir_all(&hooks_dir).expect("Failed to create a dir for hooks");
+    fs::create_dir_all(&hooks_dir).log_expect("Failed to create a dir for hooks");
 
     let hook_path = hooks_dir.join("pre-commit");
 
@@ -23,17 +22,18 @@ pub fn setup() {
     }
 
     let hook_bytes = HOOK.as_bytes();
-    let mut hook = File::create(&hook_path).expect("Failed to create a hook");
+
+    let mut hook = File::create(&hook_path).log_expect("Failed to create a hook");
     hook.write_all(hook_bytes)
-        .expect("Failed to write to a hook");
+        .log_expect("Failed to write to a hook");
 
     let mut perms = hook
         .metadata()
         .map(|x| x.permissions())
-        .expect("Failed to get permissions from hook");
+        .log_expect("Failed to get permissions from hook");
     perms.set_mode(0o755);
 
-    fs::set_permissions(hook_path, perms).expect("Failed to set new perms");
+    fs::set_permissions(hook_path, perms).log_expect("Failed to set new perms");
 
     log::info!("Success! :)");
 }

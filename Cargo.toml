@@ -11,6 +11,7 @@ gitfrog = { git = "https://github.com/mrtnvgr/gitfrog", branch = "master" }
 ignore = "0.4"
 lazy_static = "1.4"
 log = "0.4"
+log_err = "1.1.1"
 regex = "1.10"
 tokio = { version = "1", features = ["full"] }
 url = "2.5"

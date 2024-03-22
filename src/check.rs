@@ -3,6 +3,7 @@ use git2::{Config, Repository};
 use gitfrog::Info as GitInfo;
 use ignore::Walk;
 use lazy_static::lazy_static;
+use log_err::{LogErrOption, LogErrResult};
 use regex::Regex;
 use std::{fs::read_to_string, process::exit};
 use url::Url;
@@ -51,7 +52,7 @@ pub async fn perform(args: Check) {
         .filter(|x| x.file_type().is_some_and(|t| !t.is_dir()));
 
     let mut contexts = Vec::new();
-    let cwd = std::env::current_dir().expect("Failed to get cwd");
+    let cwd = std::env::current_dir().log_expect("Failed to get cwd");
 
     for file in files {
         let Ok(text) = read_to_string(file.path()) else {
@@ -61,15 +62,15 @@ pub async fn perform(args: Check) {
         let rel_path = file
             .path()
             .strip_prefix(&cwd)
-            .expect("Failed to get relative path");
+            .log_expect("Failed to get relative path");
         let path = rel_path.to_string_lossy().to_string();
 
         for capture in RE.captures_iter(&text) {
             let link = capture
                 .name("link")
-                .expect("Failed to find a link in a match");
+                .log_expect("Failed to find a link in a match");
 
-            let link = Url::parse(link.as_str()).expect("Failed to parse a link");
+            let link = Url::parse(link.as_str()).log_expect("Failed to parse a link");
 
             let assignee = capture.name("assignee").map(|x| x.as_str().to_owned());
 

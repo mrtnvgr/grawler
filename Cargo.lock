@@ -490,6 +490,7 @@ dependencies = [
  "ignore",
  "lazy_static",
  "log",
+ "log_err",
  "regex",
  "tokio",
  "url",
@@ -759,6 +760,15 @@ name = "log"
 version = "0.4.21"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "90ed8c1e510134f979dbc4f070f87d4313098b704861a105fe34231c70a3901c"
+
+[[package]]
+name = "log_err"
+version = "1.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e2829e80508da18227e53a791bbe19018306f3f400bba439bc9959e9faa860f7"
+dependencies = [
+ "log",
+]
 
 [[package]]
 name = "memchr"
