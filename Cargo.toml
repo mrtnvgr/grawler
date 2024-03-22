@@ -2,6 +2,9 @@
 name = "grawler"
 version = "0.1.0"
 edition = "2021"
+description = "Check PR and issue URLs state"
+license = "GPL-3.0"
+repository = "https://github.com/mrtnvgr/grawler"
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
