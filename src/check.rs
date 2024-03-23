@@ -92,8 +92,8 @@ pub async fn perform(args: Check) {
     for (result, context) in results
         .into_iter()
         .map(Result::unwrap)
-        .filter(|x| !x.state.is_open() || args.show_open)
         .zip(contexts)
+        .filter(|(res, _)| !res.state.is_open() || args.show_open)
     {
         let is_assigned_to_us = context.assignee == username;
         let is_assigned_to_all = username.is_none() || context.assignee.is_none();
