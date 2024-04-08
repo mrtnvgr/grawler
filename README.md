@@ -4,7 +4,7 @@
 
 Check PR and issue URLs state
 
-> For a List of supported websites, check out [this](https://github.com/mrtnvgr/gitfrog) repo
+> For a list of supported websites, check out [this](https://github.com/mrtnvgr/gitfrog) repo
 
 ## Usage
 
